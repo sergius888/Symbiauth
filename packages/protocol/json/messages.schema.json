@@ -1,0 +1,177 @@
+{
+  "$id": "https://armadillo.dev/schema/messages.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Armadillo Message Protocol",
+  "description": "JSON schema for all Armadillo inter-component messages",
+  "oneOf": [
+    { "$ref": "#/definitions/PairingRequest" },
+    { "$ref": "#/definitions/PairingResponse" },
+    { "$ref": "#/definitions/SasConfirm" },
+    { "$ref": "#/definitions/RequestCredential" },
+    { "$ref": "#/definitions/Credential" },
+    { "$ref": "#/definitions/EndSession" },
+    { "$ref": "#/definitions/Ping" },
+    { "$ref": "#/definitions/Pong" },
+    { "$ref": "#/definitions/Error" }
+  ],
+  "definitions": {
+    "PairingRequest": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "pairingRequest" },
+        "sid": { 
+          "type": "string",
+          "description": "Session ID from QR code"
+        },
+        "tok": { 
+          "type": "string",
+          "description": "One-time pairing token"
+        },
+        "deviceId": { 
+          "type": "string",
+          "description": "Human-readable device identifier"
+        },
+        "clientFp": { 
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "description": "SHA-256 fingerprint of client certificate"
+        }
+      },
+      "required": ["type", "sid", "tok", "deviceId", "clientFp"],
+      "additionalProperties": false
+    },
+    "PairingResponse": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "pairingResponse" },
+        "success": { 
+          "type": "boolean",
+          "description": "Whether pairing was successful"
+        },
+        "sasRequired": { 
+          "type": "boolean",
+          "description": "Whether SAS verification is required"
+        },
+        "sasCode": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{6}$",
+          "description": "6-digit SAS code for verification"
+        },
+        "error": { 
+          "type": ["string", "null"],
+          "description": "Error message if pairing failed"
+        }
+      },
+      "required": ["type", "success", "sasRequired"],
+      "additionalProperties": false
+    },
+    "SasConfirm": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "sasConfirm" },
+        "confirmed": {
+          "type": "boolean",
+          "description": "Whether user confirmed SAS match"
+        }
+      },
+      "required": ["type", "confirmed"],
+      "additionalProperties": false
+    },
+    "RequestCredential": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "requestCredential" },
+        "domain": { 
+          "type": "string",
+          "description": "Domain name requesting credentials"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Full URL of the login page"
+        }
+      },
+      "required": ["type", "domain"],
+      "additionalProperties": false
+    },
+    "Credential": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "credential" },
+        "username": { 
+          "type": "string",
+          "description": "Username for the domain"
+        },
+        "password": { 
+          "type": "string",
+          "description": "Password for the domain"
+        }
+      },
+      "required": ["type", "username", "password"],
+      "additionalProperties": false
+    },
+    "EndSession": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "endSession" },
+        "reason": { 
+          "type": "string",
+          "enum": ["user-requested", "proximity-lost", "timeout", "error"],
+          "description": "Reason for ending the session"
+        }
+      },
+      "required": ["type", "reason"],
+      "additionalProperties": false
+    },
+    "Ping": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "ping" },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "Pong": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "pong" },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "error" },
+        "code": { 
+          "type": "string",
+          "enum": [
+            "INVALID_TOKEN",
+            "SESSION_EXPIRED", 
+            "CERTIFICATE_MISMATCH",
+            "ALPN_MISMATCH",
+            "RATE_LIMITED",
+            "INTERNAL_ERROR"
+          ],
+          "description": "Error code for programmatic handling"
+        },
+        "message": { 
+          "type": "string",
+          "description": "Human-readable error message"
+        }
+      },
+      "required": ["type", "code", "message"],
+      "additionalProperties": false
+    }
+  }
+}

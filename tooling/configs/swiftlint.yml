@@ -1,0 +1,64 @@
+disabled_rules:
+  - trailing_whitespace
+  - line_length
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - overridden_super_call
+  - redundant_nil_coalescing
+  - switch_case_on_newline
+  - unneeded_parentheses_in_closure_argument
+  - vertical_whitespace_closing_braces
+
+included:
+  - apps/tls-terminator-macos/Sources
+  - apps/app-ios/Sources
+
+excluded:
+  - Carthage
+  - Pods
+  - .build
+
+analyzer_rules:
+  - explicit_self
+  - unused_import
+
+line_length:
+  warning: 120
+  error: 200
+
+function_body_length:
+  warning: 60
+  error: 100
+
+type_body_length:
+  warning: 300
+  error: 500
+
+file_length:
+  warning: 500
+  error: 1000
+
+cyclomatic_complexity:
+  warning: 10
+  error: 20
+
+nesting:
+  type_level:
+    warning: 3
+  statement_level:
+    warning: 5
+
+identifier_name:
+  min_length:
+    warning: 3
+  max_length:
+    warning: 40
+    error: 60
+  excluded:
+    - id
+    - fp
+    - ip

@@ -1,0 +1,13 @@
+{
+  "name": "armadillo-webext",
+  "version": "0.1.0",
+  "description": "Armadillo browser extension for autofill, blur, and cookie management",
+  "private": true,
+  "scripts": {
+    "typecheck": "echo 'TypeScript checking placeholder - implement when TS is added'",
+    "test": "echo 'Tests placeholder - implement when tests are added'"
+  },
+  "keywords": ["password-manager", "autofill", "security"],
+  "author": "Armadillo Project",
+  "license": "UNLICENSED"
+}

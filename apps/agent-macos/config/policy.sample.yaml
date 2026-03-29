@@ -1,0 +1,7 @@
+version: 1
+defaults:
+  # reuse: per_session | ttl | per_op
+  reuse: ttl
+  ttl_s: 300
+  proximity_mode: prox_first_use
+rules: []

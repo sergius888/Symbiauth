@@ -1,0 +1,17 @@
+{
+  "name": "armadillo-webext",
+  "version": "0.1.0",
+  "description": "Armadillo Chrome extension for password autofill",
+  "main": "dist/background.js",
+  "scripts": {
+    "build": "echo \"Dev extension uses plain JS - no build step\"",
+    "lint": "echo \"No lint step configured\"",
+    "test": "echo \"No tests for dev slice\"",
+    "clean": "rm -rf dist/"
+  },
+  "keywords": ["password-manager", "chrome-extension", "security"],
+  "author": "Armadillo Team",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}

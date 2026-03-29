@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/apps/agent-macos"
+    schedule: { interval: "weekly" }
+    open-pull-requests-limit: 5
+  - package-ecosystem: "npm"
+    directory: "/packages/webext"
+    schedule: { interval: "weekly" }
+    open-pull-requests-limit: 5
+
+

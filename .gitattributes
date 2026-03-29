@@ -1,0 +1,15 @@
+# Tell GitHub's linguist to ignore these directories for language stats
+packages/webext/node_modules/** linguist-vendored
+apps/tls-terminator-macos/build/** linguist-generated
+apps/tls-terminator-macos/DerivedData/** linguist-generated
+build/** linguist-generated
+*.xcodeproj/** linguist-generated
+
+# Mark documentation
+*.md linguist-documentation
+
+# Make sure these are counted correctly
+*.rs linguist-language=Rust
+*.swift linguist-language=Swift
+*.js linguist-language=JavaScript
+Makefile linguist-language=Makefile

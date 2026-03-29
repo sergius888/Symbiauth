@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Armadillo (Dev)",
+  "version": "0.0.1",
+  "description": "Local-first proximity vault dev extension",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsIHk95PnPT59GO9dMuGKD604oaCy51Aw5BeQLe0epe2o7W4arTkxHOCTu7k1j0LDtLUQG6P3sbF+7AXRYr2gqJw1+47m6ysCVmYNq7+Crmp/ESESPpjKxNQsbdpd+/mpR66wSw3amJABEyDGU7JBpldMoWTHY9MJqcSI68GzDUMo/oAb6Y8GTdKfRPHKe/b13k7awAKUiGNpWroz/mII68Bwvaw/PhzRgiW67ztTKvKkVZ4w2cB0o4Nk2NkZsh02qK6fiPmeiN73awMiygo/NvsEkmpt75uQTNbkuPTOC5YSDd8cAzQ90qBv34Fh407Y3lIqRJXQ2DiBHYvV2rSt4wIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "scripting",
+    "tabs",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*",
+    "https://accounts.google.com/*",
+    "https://auth0.openai.com/*",
+    "https://accounts.youtube.com/*",
+    "https://ssl.gstatic.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_origin_as_fallback": true
+    }
+  ],
+  "commands": {
+    "armadillo-fill": {
+      "suggested_key": {
+        "default": "Ctrl+Period",
+        "mac": "Command+Period"
+      },
+      "description": "Trigger Armadillo fill"
+    }
+  }
+}

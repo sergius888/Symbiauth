@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { font: 13px system-ui; margin: 10px; min-width: 160px; }
+      input { width: 100%; padding: 6px; font: inherit; }
+      button { margin-top: 8px; width: 100%; padding: 6px; font: inherit; }
+      #status { margin-bottom: 8px; line-height: 1.4; }
+      #status div { display: flex; justify-content: space-between; }
+      #status-msg { color: #d9534f; margin-top: 4px; display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="status">
+      <div><span>Proximity</span><strong id="prox-state">–</strong></div>
+      <div><span>Vault</span><strong id="vault-state">–</strong></div>
+      <div id="status-msg"></div>
+    </div>
+    <div>Enter TOTP</div>
+    <input id="code" maxlength="6" placeholder="123456" />
+    <button id="send">Verify</button>
+    <script src="popup.js"></script>
+  </body>
+</html>

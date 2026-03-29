@@ -1,0 +1,95 @@
+# Policy Schema v2 - Step-Up Rules
+
+## Overview
+
+Armadillo's policy now supports `step_up` rules for fine-grained authentication control per origin/action.
+
+## Step-Up Configuration
+
+```yaml
+# Example: TOTP-based remote approvals for bank.com
+rules:
+  - origin: "bank.com"
+    action: "cred.get"
+    reuse: "per_session"
+    step_up:
+      mode: totp         # {none|faceid|totp}
+      ttl_s: 120         # 1..=3600 seconds
+      allow_remote: true # required when mode=totp
+
+  # Example: Face ID required for vault writes
+  - origin: "github.com"
+    action: "vault.write"
+    reuse: "per_session"
+    step_up:
+      mode: faceid
+      ttl_s: 300
+      allow_remote: false
+
+  # Example: No step-up (just proximity)
+  - origin: "localhost"
+    action: "cred.get"
+    step_up:
+      mode: none
+      ttl_s: 60
+```
+
+## Step-Up Fields
+
+### `mode` (required)
+- `none`: No additional authentication required
+- `faceid`: Require Face ID/Touch ID on iPhone (when NEAR)
+- `totp`: Require TOTP code (works when NEAR or FAR if `allow_remote=true`)
+
+### `ttl_s` (required)
+- Session duration after successful step-up authentication
+- Must be between 1 and 3600 seconds
+- Enforced using monotonic time (immune to clock manipulation)
+
+### `allow_remote` (optional, default: false)
+- When `true`: Allows operations even when user is FAR from Mac
+- When `false`: Requires physical proximity (NEAR state)
+- **Required to be `true` when `mode=totp`** (otherwise TOTP is pointless)
+
+## Validation Rules
+
+1. `ttl_s` must be in range `1..=3600`
+2. If `mode=totp`, then `allow_remote` must be `true`
+3. Mode `none` disables step-up for the matched rule
+
+## Examples
+
+### High-Security Banking
+```yaml
+rules:
+  - origin: "bank.example.com"
+    action: "cred.get"
+    step_up:
+      mode: totp
+      ttl_s: 60  # Re-auth every minute
+      allow_remote: true
+```
+
+### Corporate Vault Access
+```yaml
+rules:
+  - app: "Terminal"
+    action: "vault.read"
+    step_up:
+      mode: faceid
+      ttl_s: 300  # 5 minutes
+      allow_remote: false  # Must be near Mac
+```
+
+### Development (Relaxed)
+```yaml
+rules:
+  - origin: "localhost"
+    step_up:
+      mode: none
+      ttl_s: 3600
+```
+
+## Migration
+
+Existing policies without `step_up` continue to work unchanged. Step-up rules are opt-in per origin/action.

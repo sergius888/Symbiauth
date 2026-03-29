@@ -1,0 +1,17 @@
+name: ios-app
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+      - name: Xcode build (simulator SDK)
+        run: |
+          xcodebuild -project apps/app-ios/ArmadilloMobile/ArmadilloMobile.xcodeproj \
+            -scheme ArmadilloMobile \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -quiet \
+            CODE_SIGNING_ALLOWED=NO

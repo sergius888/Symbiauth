@@ -1,0 +1,11 @@
+name: tls-macos
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode build
+        run: |
+          xcodebuild -project apps/tls-terminator-macos/ArmadilloTLS.xcodeproj \
+            -scheme ArmadilloTLS -configuration Debug -quiet

@@ -1,0 +1,12 @@
+[workspace]
+members = [
+    "apps/agent-macos",
+    "apps/nmhost-macos",
+]
+resolver = "2"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+

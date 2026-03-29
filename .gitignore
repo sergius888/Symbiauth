@@ -1,0 +1,29 @@
+.DS_Store
+xcuserdata/
+DerivedData/
+target/
+node_modules/
+dist/
+# Xcode/macOS build outputs
+build/
+*.xcactivitylog
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+*.swiftdeps
+*.swiftsourceinfo
+*.swiftmodule
+*.dSYM/
+# Logs
+/tmp/*.log
+*.ndjson
+
+# Local runtime/state artifacts
+.armadillo/
+*.bak
+*.bak_*
+
+# Project-specific generated build outputs
+apps/tls-terminator-macos/build/
+apps/app-ios/**/build/
+packages/webext/dev/dev_key.pem

@@ -1,0 +1,1 @@
+if the UI of macos is in TLS, and since it requires same network to pair, what if we add some kind of wifi sharing shortuct, so the user iphone can connect to the same wifi as macos, and then pair. 

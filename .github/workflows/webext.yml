@@ -1,0 +1,14 @@
+name: webext
+on: [push, pull_request]
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: cd apps/webext && npm ci
+      - run: cd apps/webext && npm audit --omit=dev --audit-level=high
+      - run: cd apps/webext && npm run typecheck
+      - run: cd apps/webext && npm test --if-present

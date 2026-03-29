@@ -1,0 +1,16 @@
+name: agent
+on: [push, pull_request]
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: -A dead_code -A unused
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: fmt
+        run: cargo fmt --all -- --check
+      - name: clippy
+        run: cargo clippy -p agent-macos
+      - name: test
+        run: cargo test -p agent-macos --all-features

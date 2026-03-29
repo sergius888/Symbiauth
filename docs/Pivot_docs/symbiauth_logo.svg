@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#080808"/>
+
+  <!-- Thin Brackets [ ] -->
+  <g stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="square">
+    <line x1="80" y1="90" x2="115" y2="90"/>
+    <line x1="80" y1="90" x2="80" y2="422"/>
+    <line x1="80" y1="422" x2="115" y2="422"/>
+    <line x1="432" y1="90" x2="397" y2="90"/>
+    <line x1="432" y1="90" x2="432" y2="422"/>
+    <line x1="432" y1="422" x2="397" y2="422"/>
+  </g>
+
+  <!-- Isometric Cube Wireframe -->
+  <g stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linejoin="round">
+    <polygon points="256,140 370,206 256,272 142,206"/>
+    <polygon points="142,206 256,272 256,388 142,322"/>
+    <polygon points="256,272 370,206 370,322 256,388"/>
+  </g>
+
+  <!-- TOP FACE ASCII: isometric transform -->
+  <g transform="translate(256,206) scale(1,0.577) rotate(-45)" fill="#FFFFFF" font-family="'SF Mono','Menlo','Courier New',monospace" font-size="14" opacity="0.8">
+    <text x="-62" y="-50">▓▒░▓▒░▓▒</text>
+    <text x="-62" y="-34">0x4F 1A E</text>
+    <text x="-62" y="-18">▒░▓██░▒▓</text>
+    <text x="-62" y="-2" opacity="0.5">##{}[]░▒▓</text>
+    <text x="-62" y="14">▓▒█░▓▒░▓</text>
+    <text x="-62" y="30" opacity="0.6">░▓▒░██▒░</text>
+    <text x="-62" y="46">▒▓░▓▒░▓▒</text>
+    <text x="-62" y="62">0xEA ▓▒░▓</text>
+  </g>
+
+  <!-- LEFT FACE ASCII: skewed 30deg -->
+  <g transform="translate(199,289) skewY(30) scale(0.82,1)" fill="#FFFFFF" font-family="'SF Mono','Menlo','Courier New',monospace" font-size="11" opacity="0.65">
+    <text x="-48" y="-68">▓▒░101▒▓</text>
+    <text x="-48" y="-54">XF&gt;#@▓░▒</text>
+    <text x="-48" y="-40" opacity="0.4">░!{▓}$&amp;░▒</text>
+    <text x="-48" y="-26">▒▓0xAE░▓</text>
+    <text x="-48" y="-12">██▒░▓▒░▓</text>
+    <text x="-48" y="2" opacity="0.5">░▓▒&lt;/&gt;░▒</text>
+    <text x="-48" y="16">▓▒░▓██▒░</text>
+    <text x="-48" y="30">0x7F▒░▓▒</text>
+    <text x="-48" y="44" opacity="0.4">░▒▓░▒▓░▒</text>
+    <text x="-48" y="58">▓██░▒▓░▓</text>
+  </g>
+
+  <!-- RIGHT FACE ASCII: skewed -30deg -->
+  <g transform="translate(313,289) skewY(-30) scale(0.82,1)" fill="#FFFFFF" font-family="'SF Mono','Menlo','Courier New',monospace" font-size="11" opacity="0.65">
+    <text x="-48" y="-68">#@%▓▒░█▓</text>
+    <text x="-48" y="-54">▓▒░██▓?░</text>
+    <text x="-48" y="-40" opacity="0.4">0xEA░!▒▓</text>
+    <text x="-48" y="-26">{}//▓▒░▓</text>
+    <text x="-48" y="-12">██░▒▓░▒▓</text>
+    <text x="-48" y="2" opacity="0.5">▒▓░$#░▒▓</text>
+    <text x="-48" y="16">░▓▒░▓██▒</text>
+    <text x="-48" y="30">0x3C▒░▓▒</text>
+    <text x="-48" y="44" opacity="0.4">▓░▒▓░▒░▓</text>
+    <text x="-48" y="58">░██▒▓░▒▓</text>
+  </g>
+</svg>
