@@ -23,39 +23,32 @@ It has three working surfaces:
 
 Read [Security.md](Security.md) before treating it like a hardened security product.
 
+## Videos
+
+- [Watch macOS chamber and trusted shell demo](https://youtu.be/dDWaRmrt7Yo)
+- [Watch iPhone and macOS onboarding demo](https://youtu.be/IoyZIVMLqVo)
+
 ## Screens
 
 ### iPhone
 
-Home and trust trigger:
+<p align="center">
+  <img src="docs/media/ios_home.png" width="180" alt="iPhone Home" />
+  <img src="docs/media/ios_trusted_state.png" width="180" alt="iPhone Trusted Session" />
+  <img src="docs/media/ios_macs.png" width="180" alt="iPhone Macs" />
+</p>
 
-![iPhone Home](docs/media/ios_home.png)
-
-Live trusted session:
-
-![iPhone Trusted Session](docs/media/ios_trusted_state.png)
-
-Paired Mac registry:
-
-![iPhone Macs](docs/media/ios_macs.png)
-
-Logs:
-
-![iPhone Logs](docs/media/ios_logs.png)
-
-Settings:
-
-![iPhone Settings](docs/media/ios_settings.png)
+<p align="center">
+  <img src="docs/media/ios_logs.png" width="180" alt="iPhone Logs" />
+  <img src="docs/media/ios_settings.png" width="180" alt="iPhone Settings" />
+</p>
 
 ### macOS
 
-Secret Chamber:
-
-![macOS Secret Chamber](docs/media/macos_secrets.png)
-
-Trusted Shell:
-
-![macOS Trusted Shell](docs/media/macos_trusted_shell.png)
+<p align="center">
+  <img src="docs/media/macos_secrets.png" width="420" alt="macOS Secret Chamber" />
+  <img src="docs/media/macos_trusted_shell.png" width="420" alt="macOS Trusted Shell" />
+</p>
 
 ## First Run
 
