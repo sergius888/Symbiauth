@@ -401,3 +401,21 @@ struct TerminalTabItem: Identifiable {
     let marker: String
     let label: String
 }
+
+struct AppLaunchOverlay: View {
+    var body: some View {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                Image("SymbiAuthMark")
+                    .resizable()
+                    .interpolation(.high)
+                    .scaledToFit()
+                    .frame(width: 188, height: 188)
+            }
+        }
+        .ignoresSafeArea()
+    }
+}

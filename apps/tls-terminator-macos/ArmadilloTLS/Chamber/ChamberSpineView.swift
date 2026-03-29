@@ -8,13 +8,22 @@ struct IndustrialChamberSpineView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 5) {
-                Text("::")
-                Text("::")
+            VStack(spacing: 8) {
+                Image("SymbiAuthMark")
+                    .resizable()
+                    .interpolation(.high)
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+
+                VStack(spacing: 5) {
+                    Text("::")
+                    Text("::")
+                }
             }
             .font(.chamberMono(size: 9, weight: .medium))
             .foregroundStyle(ChamberTerminalTheme.textGhost)
-            .frame(height: 50)
+            .frame(height: 84)
 
             ForEach(spineActions, id: \.id) { item in
                 spineButton(symbol: item.symbol, active: item.isActive(viewModel), tooltip: item.label) {

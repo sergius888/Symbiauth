@@ -1,73 +1,74 @@
 # SymbiAuth
 
-SymbiAuth is an experimental iPhone + macOS trust system for short-lived sensitive work.
+SymbiAuth is an iPhone-authorized trust system for macOS.
 
-The current build has three real surfaces:
+It has three working surfaces:
 - `Secret Chamber` on macOS for secrets, notes, and documents
 - `Trusted Shell` for trust-bound terminal work with on-demand secret injection
-- `chamber` CLI commands for running a single command with injected env vars
+- `chamber` CLI commands for running one command with injected env vars
 
-This repo is public because the project is real and usable, not because it is finished.
+## What It Does
 
-## What It Is
-
-- local-first
-- paired iPhone + Mac
-- trust session on the phone
-- chamber on the Mac
-- short trusted windows instead of a permanently unlocked vault
+- starts a trust session from the iPhone
+- exposes a chamber on the Mac only while trust is active
+- lets you reveal, copy, filter, and organize secrets
+- opens a trusted shell and injects selected secrets into that shell session
+- wraps one-off terminal commands through the CLI without leaving secrets in your parent shell
 
 ## What It Is Not
 
-- not production security software
-- not a polished password-manager replacement
+- not a password-manager replacement
 - not a full terminal emulator
-- not a promise that a compromised Mac cannot reach local state
+- not a claim that a compromised Mac cannot reach local state
 
-If you want the blunt version: this is an experimental system with working pieces, not a finished security product.
+Read [Security.md](Security.md) before treating it like a hardened security product.
 
-## Current Shape
+## Screens
 
-What works today:
-- iPhone trust session flow
-- macOS menu bar app
-- Secret Chamber
-- Trusted Shell
-- chamber CLI
-- tags, filters, favorites, notes, documents
+### iPhone
 
-What is still rough:
-- naming still has old internal traces like `Armadillo` and `dreiglaser`
-- some internal names and target names still need cleanup
-- browser-extension work exists, but it is not the main public story right now
+Home and trust trigger:
 
-## Repo Layout
+![iPhone Home](docs/media/ios_home.png)
 
-```text
-apps/
-  agent-macos/           Rust local agent and CLI
-  app-ios/               iPhone app
-  tls-terminator-macos/  macOS menu bar app and chamber UI
-packages/
-  protocol/              shared protocol definitions
-  webext/                browser-extension work
-docs/
-  Progress/              work log and running notes
-  Pivot_docs/            product and implementation notes
-```
+Live trusted session:
 
-## Running It
+![iPhone Trusted Session](docs/media/ios_trusted_state.png)
+
+Paired Mac registry:
+
+![iPhone Macs](docs/media/ios_macs.png)
+
+Logs:
+
+![iPhone Logs](docs/media/ios_logs.png)
+
+Settings:
+
+![iPhone Settings](docs/media/ios_settings.png)
+
+### macOS
+
+Secret Chamber:
+
+![macOS Secret Chamber](docs/media/macos_secrets.png)
+
+Trusted Shell:
+
+![macOS Trusted Shell](docs/media/macos_trusted_shell.png)
+
+## First Run
 
 You need:
 - macOS
 - Xcode
 - Rust
-- a physical iPhone for the trust flow
+- a physical iPhone
 
-Start the Rust agent:
+Start the local agent:
 
 ```bash
-cargo run --manifest-path apps/agent-macos/Cargo.toml
+cargo run --manifest-path apps/agent-macos/Cargo.toml --bin agent-macos
 ```
 
 Build and run the macOS app:
@@ -87,12 +88,24 @@ Run the iPhone app from Xcode:
 apps/app-ios/ArmadilloMobile/ArmadilloMobile.xcodeproj
 ```
 
-## CLI Example
+Then:
+1. Pair the iPhone with the Mac from the QR flow.
+2. Start a trust session on the iPhone.
+3. Open the chamber from the macOS menu bar.
+4. Use the chamber, trusted shell, or CLI while the trust session stays active.
 
-With trust active on the phone:
+## CLI
+
+Check trust:
 
 ```bash
 cargo run --manifest-path apps/agent-macos/Cargo.toml --bin agent-cli -- chamber status
+```
+
+List known secrets:
+
+```bash
+cargo run --manifest-path apps/agent-macos/Cargo.toml --bin agent-cli -- chamber list
 ```
 
 Run one command with an injected env var:
@@ -103,28 +116,34 @@ cargo run --manifest-path apps/agent-macos/Cargo.toml --bin agent-cli -- \
   bash -lc 'echo ${#GEMINI_API_KEY}'
 ```
 
-## Security Notes
+## Repo Layout
 
-Read [Security.md](Security.md) before treating this like a real security tool.
-
-Short version:
-- trust gating is real
-- local storage is real
-- shell injection is real
-- the threat model is still narrower than a finished commercial product
+```text
+apps/
+  agent-macos/           Rust local agent and CLI
+  app-ios/               iPhone app
+  tls-terminator-macos/  macOS menu bar app and chamber UI
+packages/
+  protocol/              shared protocol definitions
+  webext/                browser-extension work
+docs/
+  architecture.md
+  threat_model.md
+  tls_rotation.md
+```
 
 ## Naming
 
 Public name: `SymbiAuth`
 
-Internal traces you will still see in the repo:
+You will still see old internal names in the codebase:
 - `Armadilo`
 - `Armadillo`
 - `ArmadilloTLS`
 - `ArmadilloMobile`
 - `com.dreiglaser.*`
 
-Those traces are not the public product name. They are migration debt.
+That cleanup is still in progress.
 
 ## Contributing
 

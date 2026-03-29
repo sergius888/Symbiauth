@@ -9,12 +9,21 @@ struct SessionView: View {
 
             VStack(spacing: 22) {
                 VStack(spacing: 10) {
+                    Image("SymbiAuthMark")
+                        .resizable()
+                        .interpolation(.high)
+                        .scaledToFit()
+                        .frame(width: 72, height: 72)
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+
                     TerminalKicker(text: "[ TRUSTED SESSION ]", tint: AppTheme.ferroTextSecondary)
 
-                    Text("SymbiAuth Session")
+                    Text("SymbiAuth")
                         .font(AppTypography.title(32))
                         .foregroundStyle(AppTheme.ferroTextPrimary)
                         .tracking(1.8)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
 
                     Text("Hardware presence is currently authorizing your active Mac")
                         .font(AppTypography.body(16))

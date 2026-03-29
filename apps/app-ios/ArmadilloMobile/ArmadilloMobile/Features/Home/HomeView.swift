@@ -47,11 +47,20 @@ struct HomeView: View {
     }
 
     private var header: some View {
-        TerminalSectionHeader(
-            kicker: "[ TRUST RELAY ]",
-            title: "SymbiAuth",
-            detail: "Phone presence unlocks your active Mac."
-        )
+        HStack(alignment: .center, spacing: 14) {
+            Image("SymbiAuthMark")
+                .resizable()
+                .interpolation(.high)
+                .scaledToFit()
+                .frame(width: 52, height: 52)
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+            TerminalSectionHeader(
+                kicker: "[ TRUST RELAY ]",
+                title: "SymbiAuth",
+                detail: "Phone presence unlocks your active Mac."
+            )
+        }
     }
 
     private var sessionButtonSection: some View {

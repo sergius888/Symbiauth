@@ -9,9 +9,9 @@ extension AppDelegate {
         if statusItem == nil {
             statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
             if let button = statusItem?.button {
-                button.image = NSImage(systemSymbolName: "shield", accessibilityDescription: "Armadillo TLS")
-                button.toolTip = "Armadillo TLS Terminator"
-                print("✅ Status bar button created with shield icon")
+                button.image = stableStatusBarImage()
+                button.toolTip = "SymbiAuth"
+                print("✅ Status bar button created with stable icon")
             } else {
                 print("❌ Failed to get status item button")
                 return
@@ -118,18 +118,14 @@ extension AppDelegate {
 
     private func updateStatusBarIcon() {
         guard let button = statusItem?.button else { return }
-        let symbol: String
-        switch trustVisualState() {
-        case .trusted:
-            symbol = "lock.open.fill"
-        case .countdown:
-            symbol = "timer"
-        case .locked:
-            symbol = "lock.fill"
-        case .idle:
-            symbol = "shield"
-        }
-        button.image = NSImage(systemSymbolName: symbol, accessibilityDescription: "Armadillo TLS")
+        button.image = stableStatusBarImage()
+        button.toolTip = "SymbiAuth"
+    }
+
+    private func stableStatusBarImage() -> NSImage? {
+        let image = NSImage(systemSymbolName: "lock.shield", accessibilityDescription: "SymbiAuth")
+        image?.isTemplate = true
+        return image
     }
 
     private enum TrustVisualState {

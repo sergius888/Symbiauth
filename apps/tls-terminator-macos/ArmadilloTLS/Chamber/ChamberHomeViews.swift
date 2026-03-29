@@ -8,11 +8,22 @@ struct ChamberHomeTabView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Secret Chamber")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    Text("A private workspace that becomes available only while your paired iPhone trust session is active.")
-                        .foregroundStyle(.secondary)
+                    HStack(alignment: .center, spacing: 14) {
+                        Image("SymbiAuthMark")
+                            .resizable()
+                            .interpolation(.high)
+                            .scaledToFit()
+                            .frame(width: 58, height: 58)
+                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Secret Chamber")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Text("A private workspace that becomes available only while your paired iPhone trust session is active.")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                     HStack(spacing: 10) {
                         statusPill(
                             title: viewModel.chamberTrustStateLabel,
@@ -105,8 +116,16 @@ struct ChamberHomeTabView: View {
                 .overlay(alignment: .topLeading) {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text("Secret Chamber")
-                                .font(.title3.weight(.semibold))
+                            HStack(spacing: 10) {
+                                Image("SymbiAuthMark")
+                                    .resizable()
+                                    .interpolation(.high)
+                                    .scaledToFit()
+                                    .frame(width: 28, height: 28)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                Text("Secret Chamber")
+                                    .font(.title3.weight(.semibold))
+                            }
                             Spacer()
                             Text(viewModel.hasActiveTrust ? "Trusted" : "Locked")
                                 .font(.caption.weight(.semibold))
