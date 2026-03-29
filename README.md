@@ -38,7 +38,7 @@ What works today:
 
 What is still rough:
 - naming still has old internal traces like `Armadillo` and `dreiglaser`
-- some docs are historical and not fully cleaned up
+- some internal names and target names still need cleanup
 - browser-extension work exists, but it is not the main public story right now
 
 ## Repo Layout
