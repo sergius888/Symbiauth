@@ -20,7 +20,7 @@ sha2 = "0.10"
 hex = "0.4"
 rand = "0.8"
 aes-gcm = "0.10"
-base64 = "0.21"
+base64 = "0.22"
 hkdf = "0.12"
 p256 = { version = "0.13", features = ["ecdh"] }
 bip39 = { version = "2", default-features = false, features = ["rand"] }
